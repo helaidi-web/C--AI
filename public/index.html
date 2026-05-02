@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your C Assistance | ChatGPT</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="background"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-group">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="brand-mark-core">C</span>
+          <span class="brand-mark-ai">ai</span>
+        </div>
+        <div class="brand-copy">
+          <p class="eyebrow">Your C Assistance</p>
+          <strong class="brand-tag">C Programming</strong>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <p class="eyebrow">Developer workspace</p>
+        <h1><strong>Developer-grade</strong> C analysis workspace</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <details class="contact-menu">
+          <summary class="menu-button" aria-label="Contact us menu">☰</summary>
+          <div class="contact-panel">
+            <p class="contact-title">Contact us</p>
+            <a href="mailto:h.elaidi@esisa.ac.ma">h.elaidi@esisa.ac.ma</a>
+            <a href="mailto:m.touhafiriffi@esisa.ac.ma">m.touhafiriffi@esisa.ac.ma</a>
+            <a href="https://github.com/helaidi-web" target="_blank" rel="noreferrer">GitHub: helaidi-web</a>
+            <a href="https://www.linkedin.com/in/hamza-el-aidi-b9210838b" target="_blank" rel="noreferrer">LinkedIn: Hamza El Aidi</a>
+            <a href="https://www.linkedin.com/in/meryem-touhafi-riffi-173a58398" target="_blank" rel="noreferrer">LinkedIn: Meryem Touhafi Riffi</a>
+          </div>
+        </details>
+
+        <div class="status-chip" aria-live="polite">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="connectionState">Connecting...</strong>
+            <p id="serverStatus">Checking backend...</p>
+          </div>
+        </div>
+        <button id="analyzeButton" class="primary-button" type="button">Run analysis</button>
+        <button id="assistantButton" class="secondary-button" type="button">Ask ChatGPT</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="editor-pane panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-kicker">Code editor</p>
+            <h2>Analyze C code</h2>
+          </div>
+          <button id="loadExample" class="ghost-button" type="button">Load example</button>
+        </div>
+
+        <div class="editor-shell">
+          <div class="line-gutter" id="lineNumbers" aria-hidden="true"></div>
+          <textarea id="codeInput" spellcheck="false" placeholder="Paste your C code here..."></textarea>
+        </div>
+
+        <div class="editor-meta">
+          <div class="meta-pill"><span class="pill-dot"></span><span id="metricLines">0 lines</span></div>
+          <div class="meta-pill"><span class="pill-dot"></span><span id="metricChars">0 chars</span></div>
+          <div class="meta-pill"><span class="pill-dot"></span><span id="metricComplexity">Complexity: low</span></div>
+        </div>
+
+        <div class="form-row">
+          <label for="questionInput">Analysis prompt</label>
+          <input id="questionInput" type="text" value="Explain this code step by step in a simple way, then identify bugs, improvements, and the final summary." />
+        </div>
+
+        <div class="quick-actions">
+          <button class="ghost-button quick-action" data-fill="minimal">Minimal example</button>
+          <button class="ghost-button quick-action" data-fill="control">Control flow</button>
+          <button class="ghost-button quick-action" data-fill="io">I/O example</button>
+        </div>
+      </section>
+
+      <section class="analysis-pane panel">
+        <div class="panel-head tabs-head">
+          <div>
+            <p class="section-kicker">Insights</p>
+            <h2>Analysis dashboard</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Analysis tabs">
+            <button class="tab-button active" data-tab="summary" role="tab" aria-selected="true">Summary</button>
+            <button class="tab-button" data-tab="details" role="tab" aria-selected="false">Detailed analysis</button>
+            <button class="tab-button" data-tab="metrics" role="tab" aria-selected="false">Metrics</button>
+            <button class="tab-button" data-tab="ai" role="tab" aria-selected="false">AI feedback</button>
+          </div>
+        </div>
+
+        <div class="tab-panels">
+          <section class="tab-panel active" id="tab-summary" role="tabpanel">
+            <div class="hero-stats" id="summaryStats"></div>
+            <div class="card-grid" id="summaryCards"></div>
+            <div class="glass-card summary-card" id="localSummary">No analysis yet.</div>
+            <div class="accordion-list" id="summaryAccordion"></div>
+          </section>
+
+          <section class="tab-panel" id="tab-details" role="tabpanel">
+            <div class="detail-layout">
+              <div class="detail-column" id="detailCards"></div>
+              <div class="detail-column">
+                <div class="result-box glass-card">
+                  <div class="card-title-row">
+                    <h3>Code details</h3>
+                    <span class="badge info">Detected</span>
+                  </div>
+                  <div id="detailSummary" class="stack-text"></div>
+                </div>
+                <div class="result-box glass-card">
+                  <div class="card-title-row">
+                    <h3>Warnings</h3>
+                    <span class="badge warning">Check</span>
+                  </div>
+                  <div id="warningList" class="stack-text"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="tab-metrics" role="tabpanel">
+            <div class="metrics-grid" id="metricsGrid"></div>
+          </section>
+
+          <section class="tab-panel" id="tab-ai" role="tabpanel">
+            <div class="glass-card ai-panel">
+              <div class="card-title-row">
+                <h3>ChatGPT feedback</h3>
+                <span class="badge ai">OpenAI</span>
+              </div>
+              <div id="assistantSummary" class="stack-text muted">No AI response yet.</div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <section class="footer-strip panel">
+      <div>
+        <p class="section-kicker">Workflow</p>
+        <h2>Paste code, analyze instantly, refine with ChatGPT.</h2>
+      </div>
+      <div class="footer-micro">
+        <span class="badge info">Responsive</span>
+        <span class="badge ai">Glass UI</span>
+        <span class="badge warning">C focused</span>
+      </div>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
