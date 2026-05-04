@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const { exec } = require('child_process');
 
 function loadEnvFile(filePath) {
@@ -380,11 +381,11 @@ const server = http.createServer(async (req, res) => {
           finalCode = "#include <stdio.h>\n#include <stdlib.h>\nint main() {\n" + code + "\nreturn 0;\n}";
       }
 
-      // Compilation et exÃ©cution C
-      const id = Date.now() + '_' + Math.floor(Math.random() * 10000);
-      const cFile = path.join(__dirname, `temp_${id}.c`);
-      const exeFile = path.join(__dirname, `temp_${id}.exe`);
-      const inFile = path.join(__dirname, `temp_${id}.in`);
+        // Compilation et exécution C
+        const id = Date.now() + '_' + Math.floor(Math.random() * 10000);
+        const cFile = path.join(os.tmpdir(), `temp_${id}.c`);
+        const exeFile = path.join(os.tmpdir(), `temp_${id}.exe`);
+        const inFile = path.join(os.tmpdir(), `temp_${id}.in`);
       
       const stdinData = String(body.stdin || '');
 
