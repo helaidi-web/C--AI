@@ -6,57 +6,60 @@
 void explainCode(char code[]) {
     printf("\n=== AI EXPLANATION ===\n");
 
-    if (strstr(code, "for") != NULL) {
-        printf("- knxoufo kyna For fhad lcode.\n");
-        printf("- ktstakhdm bla condition d'arret w lhadaf dilha t3awd i w t2nkrimentiha hta twsl l n w tw9f.\n");
+    if (strstr(code, "#include") != NULL) {
+        printf("- Detected '#include'. It is a preprocessor directive used to include standard or user-defined headers.\n");
     }
-
-   
-    if (strstr(code, "while") != NULL) {
-        printf("- knxoufo kyna While fhad lcode.\n");
-        printf("- ltstakhdm bcodition d'arret li hiya entre () w kt3ni 3wd hta l had lcodition.\n");
-    }
-
-     
-
-     if (strstr(code, "do") != NULL) {
-        printf("- knxoufo kyna DO fhad lcode.\n");
-        printf("- ltstakhdm bcodition d'arret li hiya entre () w kt3ni 3wd hta l had lcodition.\n");
-    }
-
-   
-
-    if (strstr(code, "if") != NULL) {
-        printf("- knxoufo kyna If fhad lcode.\n");
-        printf("- ltstakhdm bcodition d'arret li hiya entre () w kt3ni ila t79a9at dkhol mt79atx khrj.\n");
-    }
-
-     
-
-    if (strstr(code, "printf") != NULL) {
-        printf("- printf kt3br 3la laffichage dikxi li wstha howa li kyt2ficha.\n");
-    }
-
-   
-
-    if (strstr(code, "scanf") != NULL) {
-        printf("- scanf kt9ra dikxi li affichit.\n");
-    }
-        
-    
-
-   
-
-    if (strstr(code, "void") != NULL)  
-    {
-        printf("- knxoufo kyna VOID fhad lcode.\n");
-        printf("- hiya wa7d lfonction li ma kat3awdch chi 7aja w kat9dr t3awd t3awd t3awd.\n");
-    }
-    
-    
 
     if (strstr(code, "int main") != NULL) {
-        printf("- knxoufo kyna Int Main fhad lcode.\n");
+        printf("- Detected 'int main'. This is the main entry point where the program execution begins.\n");
+    }
+
+    if (strstr(code, "for") != NULL) {
+        printf("- Detected a 'for' loop. It is used to iterate over a block of code with an initialization, condition, and increment.\n");
+    }
+
+    if (strstr(code, "while") != NULL) {
+        printf("- Detected a 'while' loop. It executes a block of code repeatedly as long as a given condition is true.\n");
+    }
+
+    if (strstr(code, "do") != NULL) {
+        printf("- Detected a 'do-while' loop. It executes a block of code at least once before checking the condition.\n");
+    }
+
+    if (strstr(code, "if") != NULL) {
+        printf("- Detected an 'if' statement. It is used for conditional branching (executes if the condition is true).\n");
+    }
+
+    if (strstr(code, "switch") != NULL) {
+        printf("- Detected a 'switch' statement. It evaluates an expression and executes the corresponding 'case' block.\n");
+    }
+
+    if (strstr(code, "printf") != NULL) {
+        printf("- Detected 'printf'. It outputs formatted text to the standard output (screen).\n");
+    }
+
+    if (strstr(code, "scanf") != NULL) {
+        printf("- Detected 'scanf'. It reads formatted input from the standard input (keyboard).\n");
+    }
+
+    if (strstr(code, "void") != NULL) {
+        printf("- Detected 'void'. It indicates that a function does not return a value.\n");
+    }
+
+    if (strstr(code, "return") != NULL) {
+        printf("- Detected 'return'. It ends the execution of a function and optionally returns a value.\n");
+    }
+
+    if (strstr(code, "struct") != NULL) {
+        printf("- Detected 'struct'. It is a user-defined data type that groups related variables of different types.\n");
+    }
+
+    if (strstr(code, "malloc") != NULL) {
+        printf("- Detected 'malloc'. It is used for dynamic memory allocation during program execution.\n");
+    }
+
+    if (strstr(code, "free") != NULL) {
+        printf("- Detected 'free'. It is used to deallocate memory previously allocated by malloc.\n");
     }
 
     printf("\n=== END OF ANALYSIS ===\n");
