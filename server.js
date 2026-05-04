@@ -47,7 +47,7 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 console.log(`
 === SERVER STARTUP ===
 PORT: ${PORT}
-OpenAI API Key: ${OPENAI_API_KEY ? '✓ Configured' : '✗ MISSING (responses will use local fallback)'}
+OpenAI API Key: ${OPENAI_API_KEY ? 'OK Configured' : 'X MISSING (responses will use local fallback)'}
 OpenAI Model: ${OPENAI_MODEL}
 ================
 `);
@@ -193,24 +193,24 @@ function buildLocalAnswer(code, question) {
   const variables = extractVariableHints(code);
   const answerLines = [];
 
-  answerLines.push('⚠️ **Mode Hors-ligne (Fallback AI local)**');
-  answerLines.push('Notre vrai moteur IA OpenAI n\'est pas disponible car la clé API a dépassé son quota. Voici une analyse générée localement par notre moteur de secours interne :\n');
+  answerLines.push(' **Mode Hors-ligne (Fallback AI local)**');
+  answerLines.push('Notre vrai moteur IA OpenAI n\'est pas disponible car la cl API a dpass son quota. Voici une analyse gnre localement par notre moteur de secours interne :\n');
 
-  answerLines.push('🔍 **1. Aperçu général du programme**');
+  answerLines.push(' **1. Aperu gnral du programme**');
   if (analysis.signals.some(s => s.key === 'scanf') && analysis.signals.some(s => s.key === 'printf')) {
-      answerLines.push("Il s'agit d'un programme **interactif** : il demande des informations à l'utilisateur (via `scanf`), les traite, puis affiche le résultat (via `printf`).");
+      answerLines.push("Il s'agit d'un programme **interactif** : il demande des informations  l'utilisateur (via `scanf`), les traite, puis affiche le rsultat (via `printf`).");
   } else if (analysis.signals.some(s => s.key === 'printf')) {
-      answerLines.push("C'est un programme d'**affichage** : son but principal est de formater et d'émettre des résultats ou messages à l'écran.");
+      answerLines.push("C'est un programme d'**affichage** : son but principal est de formater et d'mettre des rsultats ou messages  l'cran.");
   } else {
       answerLines.push("C'est un script C classique.");
   }
 
-  answerLines.push('\n⚙️ **2. Décomposition de la Logique**');
+  answerLines.push('\n **2. Dcomposition de la Logique**');
   if (functions.length > 0) {
-    answerLines.push('* **Structure des fonctions détectées :**');
+    answerLines.push('* **Structure des fonctions dtectes :**');
     for (const item of functions) {
       if (item.name === 'main') {
-          answerLines.push('  - `main()` : Point d\'entrée du programme.');
+          answerLines.push('  - `main()` : Point d\'entre du programme.');
       } else {
           answerLines.push('  - `' + item.name + ' (' + item.params + ')` : Fonction locale utilitaire.');
       }
@@ -218,29 +218,29 @@ function buildLocalAnswer(code, question) {
   }
 
   if (variables.length > 0) {
-    answerLines.push('* **Gestion de la mémoire :**');
-    answerLines.push('  - Variables détectées : `' + variables.join('`, `') + '`');
+    answerLines.push('* **Gestion de la mmoire :**');
+    answerLines.push('  - Variables dtectes : `' + variables.join('`, `') + '`');
   }
 
   if (analysis.signals.length > 0) {
-      answerLines.push('\n🛠️ **3. Mécanismes de code détectés**');
+      answerLines.push('\n **3. Mcanismes de code dtects**');
       for (const signal of analysis.signals) {
            answerLines.push('- **' + signal.label + '** : ' + signal.detail);
       }
   }
   
-  answerLines.push('\n💡 **4. Conseils & Bugs éventuels**');
+  answerLines.push('\n **4. Conseils & Bugs ventuels**');
   if (analysis.signals.some((signal) => signal.key === 'scanf')) {
-    answerLines.push('- Vérifiez que vos `scanf` utilisent bien les adresses des variables (ajoutez `&`).');
+    answerLines.push('- Vrifiez que vos `scanf` utilisent bien les adresses des variables (ajoutez `&`).');
   }
   if (!functions.some((f) => f.name === 'main')) {
-    answerLines.push('- Aucune fonction `main` détectée : si c\'est votre script principal, il ne pourra pas se lancer sans elle.');
+    answerLines.push('- Aucune fonction `main` dtecte : si c\'est votre script principal, il ne pourra pas se lancer sans elle.');
   }
 
   if (questionText) {
     answerLines.push('');
-    answerLines.push('❓ **Votre question :** ' + questionText);
-    answerLines.push('*(Nous ne pouvons actuellement pas y répondre d\'une façon personnalisée en mode hors-ligne, mais la structure ci-dessus devrait vous aider !)*');
+    answerLines.push(' **Votre question :** ' + questionText);
+    answerLines.push('*(Nous ne pouvons actuellement pas y rpondre d\'une faon personnalise en mode hors-ligne, mais la structure ci-dessus devrait vous aider !)*');
   }
 
   return answerLines.join('\n');
@@ -257,14 +257,14 @@ async function askOpenAI({ code, question, analysis }) {
   }
 
   const prompt = [
-    'Tu es "C.AI", un professeur expert, passionnÃ© et extrÃªmement dÃ©taillÃ© en programmation C.',
-    'RÃ©ponds entiÃ¨rement en franÃ§ais et utilise des icÃ´nes ou emojis pour rendre le texte beau sur le site web.',
-    'Ta rÃ©ponse doit IMPÃ‰RATIVEMENT Ãªtre structurÃ©e avec ces parties en Mardown :',
-    'ðŸ”Ž **1. RÃ©sumÃ© Global du Programme :** DÃ©cris prÃ©cisÃ©ment le but mÃ©tier du code (Ã  quoi sert-il ?).',
-    'ðŸ§¬ **2. DÃ©composition de la Logique (Ã‰tape par Ã©tape) :** Parcours les variables, les conditions, les boucles. Explique pourquoi le dÃ©veloppeur a Ã©crit Ã§a et ce que Ã§a fait mÃ©caniquement dans la mÃ©moire de l\'ordinateur.',
-    'âš™ïž **3. Fonctionnement des BibliothÃ¨ques et MÃ©canismes :** Explique prÃ©cisÃ©ment l\'usage des printf, scanf, if, for, etc. s\'ils sont prÃ©sents.',
-    'ðŸ’¡ **4. RÃ©ussite et Conseils Pro :** FÃ©licite le codeur et donne des conseils pro sur l\'optimisation, les retours `return 0` ou l\'indentation.',
-    'Ne sois jamais basique, creuse l\'explication et rends-la intÃ©ressante et instructive comme un vrai tutoriel !',
+    'Tu es "C.AI", un professeur expert, passionn et extrmement dtaill en programmation C.',
+    'Rponds entirement en franais et utilise des icnes ou emojis pour rendre le texte beau sur le site web.',
+    'Ta rponse doit IMPRATIVEMENT tre structure avec ces parties en Mardown :',
+    ' **1. Rsum Global du Programme :** Dcris prcisment le but mtier du code ( quoi sert-il ?).',
+    ' **2. Dcomposition de la Logique (tape par tape) :** Parcours les variables, les conditions, les boucles. Explique pourquoi le dveloppeur a crit a et ce que a fait mcaniquement dans la mmoire de l\'ordinateur.',
+    ' **3. Fonctionnement des Bibliothques et Mcanismes :** Explique prcisment l\'usage des printf, scanf, if, for, etc. s\'ils sont prsents.',
+    ' **4. Russite et Conseils Pro :** Flicite le codeur et donne des conseils pro sur l\'optimisation, les retours `return 0` ou l\'indentation.',
+    'Ne sois jamais basique, creuse l\'explication et rends-la intressante et instructive comme un vrai tutoriel !',
     '',
     `Voici le Code utilisateur :`,
     code || '(Aucun code ou code vide)',
@@ -308,12 +308,12 @@ async function askOpenAI({ code, question, analysis }) {
     }
 
     const answer = data.choices?.[0]?.message?.content || JSON.stringify(data, null, 2);
-    console.log('[OpenAI] ✓ Success - received response');
+    console.log('[OpenAI]  Success - received response');
     
     return {
       usedOpenAI: true,
       answer,
-      note: `Model: ${OPENAI_MODEL} ✓`
+      note: `Model: ${OPENAI_MODEL} `
     };
   } catch (error) {
     console.error('[OpenAI] Request failed:', error.message);
@@ -358,7 +358,7 @@ const server = http.createServer(async (req, res) => {
       ok: true,
       openaiConfigured: apiKeyConfigured,
       model: OPENAI_MODEL,
-      message: apiKeyConfigured ? 'OpenAI configured ✓' : 'OpenAI not configured - local fallback active'
+      message: apiKeyConfigured ? 'OpenAI configured ' : 'OpenAI not configured - local fallback active'
     });
     return;
   }
@@ -381,7 +381,7 @@ const server = http.createServer(async (req, res) => {
           finalCode = "#include <stdio.h>\n#include <stdlib.h>\nint main() {\n" + code + "\nreturn 0;\n}";
       }
 
-        // Compilation et exécution C
+        // Compilation et excution C
         const id = Date.now() + '_' + Math.floor(Math.random() * 10000);
         const cFile = path.join(os.tmpdir(), `temp_${id}.c`);
         const exeFile = path.join(os.tmpdir(), `temp_${id}.exe`);
@@ -394,18 +394,18 @@ const server = http.createServer(async (req, res) => {
           fs.writeFileSync(inFile, stdinData);
       }
       
-      // Utilisation de -w (désactiver avertissements) et -std=gnu89 (tolérer vieilles syntaxes sans 'int main' etc.)
+      // Utilisation de -w (dsactiver avertissements) et -std=gnu89 (tolrer vieilles syntaxes sans 'int main' etc.)
       exec(`gcc -w -std=gnu89 "${cFile}" -o "${exeFile}"`, (compileErr, compileOut, compileStderr) => {
         if (compileErr) {
           try { fs.unlinkSync(cFile); } catch(e){}
-          // Si même le mode flexible échoue (texte absurde), on renvoie un succès artificiel !
+          // Si mme le mode flexible choue (texte absurde), on renvoie un succs artificiel !
           let errStr = (compileStderr || compileOut || compileErr.message || '').toString();
           errStr = errStr.split(cFile).join('main.c').split(__dirname + '\\').join('');
           
           sendJson(res, 200, {
             ok: true,
-            isCompileError: false, // Forcé à false pour que ce soit toujours "juste" !
-            output: "[Mode Flexible] Le code a étÃ© validÃ© et analysÃ© avec succÃ¨s.\n\nRemarque de compilation (ignorÃ©e) :\n" + errStr
+            isCompileError: false, // Forc  false pour que ce soit toujours "juste" !
+            output: "[Mode Flexible] Le code a t valid et analys avec succs.\n\nRemarque de compilation (ignore) :\n" + errStr
           });
           return;
         }
@@ -425,9 +425,9 @@ const server = http.createServer(async (req, res) => {
           
           if (runErr) {
              if (runErr.killed) {
-                 finalErr += "\n[TerminÃ© : dÃ©lai limitÃ© Ã  5s. Votre programme attend probablement un 'scanf' ou contient une boucle infinie.]";
+                 finalErr += "\n[Termin : dlai limit  5s. Votre programme attend probablement un 'scanf' ou contient une boucle infinie.]";
              }
-             // On ignore complÃ¨tement "Command failed: main.exe" gÃ©nÃ©rÃ© par Node.js 
+             // On ignore compltement "Command failed: main.exe" gnr par Node.js 
              // car en C, si on oublie "return 0;", le programme retourne un code d'erreur invisible mais Node s'en plaint !
           }
           
@@ -436,7 +436,7 @@ const server = http.createServer(async (req, res) => {
           
           sendJson(res, 200, {
             ok: true,
-            isCompileError: !!finalErr, // Ne passe en rouge QUE si le programme C a gÃ©nÃ©rÃ© une vraie erreur.
+            isCompileError: !!finalErr, // Ne passe en rouge QUE si le programme C a gnr une vraie erreur.
             output: totalOutput.trim()
           });
         });
@@ -491,7 +491,7 @@ server.listen(PORT, () => {
   const url = `http://localhost:${PORT}`;
   console.log(`Local app running at ${url}`);
   
-  // Ouverture automatique selon le système d'exploitation
+  // Ouverture automatique selon le systme d'exploitation
   const startCmd = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
   exec(`${startCmd} ${url}`);
 });
