@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.AI - Futuristic AI Code Platform</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="/tailwind-cdn.js"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="/lucide-cdn.js"></script>
+
+    <link rel="stylesheet" href="/landing.css">
+</head>
+<body class="bg-[#020617] text-white overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 animated-gradient"></div>
+        <div class="absolute inset-0 grid-background"></div>
+
+        <!-- Floating Code Snippets -->
+        <div class="floating-code-snippets">
+            <div class="code-snippet" style="top: 10%; left: 5%; animation-delay: 0s;">void main() {}</div>
+            <div class="code-snippet" style="top: 25%; right: 8%; animation-delay: 2s;">// analyze</div>
+            <div class="code-snippet" style="bottom: 30%; left: 15%; animation-delay: 4s;">printf("AI");</div>
+            <div class="code-snippet" style="top: 50%; right: 5%; animation-delay: 6s;">return 0;</div>
+            <div class="code-snippet" style="bottom: 15%; right: 12%; animation-delay: 3s;">#include</div>
+            <div class="code-snippet" style="top: 35%; left: 8%; animation-delay: 5s;">if (true) {}</div>
+        </div>
+
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Navbar -->
+    <header class="sticky top-0 z-50 border-b border-cyan-500/10">
+        <nav class="navbar-glass max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home" class="logo-text">
+                <span class="text-xl font-bold tracking-wider">
+                    <span class="text-cyan-400">C</span><span class="text-purple-500 font-light">.AI</span>
+                </span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-12">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="text-sm text-gray-400">AI-Powered Code Platform</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Laptop Mockup -->
+    <section id="home" class="min-h-screen pt-24 pb-20 px-6 flex items-center">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div class="space-y-6 fade-in-element">
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                    Build C Programs
+                    <br>
+                    <span class="gradient-text">Faster With AI</span>
+                </h1>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Analyze, debug, explain and generate C code instantly using artificial intelligence. Get real-time insights and smart explanations for every line of code.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button onclick="document.getElementById('app-section').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition neon-glow-blue">
+                        Start Coding
+                    </button>
+                    <button onclick="document.getElementById('app-section').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 border-2 border-purple-500 text-purple-400 rounded-lg font-semibold hover:bg-purple-500/10 transition neon-glow-purple">
+                        Try AI Demo
+                    </button>
+                </div>
+
+                <!-- Floating code snippets -->
+                <div class="mt-12 space-y-3">
+                    <div class="inline-block px-4 py-2 border border-cyan-500/30 rounded text-cyan-400 text-sm font-mono">void main() {}</div>
+                    <div class="inline-block px-4 py-2 border border-cyan-500/30 rounded text-cyan-400 text-sm font-mono ml-8">// analyze</div>
+                </div>
+            </div>
+
+            <!-- Right - Laptop Mockup -->
+            <div class="fade-in-element laptop-mockup-container">
+                <div class="laptop-mockup">
+                    <div class="laptop-screen">
+                        <div class="macos-header">
+                            <div class="macos-dots">
+                                <span class="mac-dot red"></span>
+                                <span class="mac-dot yellow"></span>
+                                <span class="mac-dot green"></span>
+                            </div>
+                        </div>
+                        <div class="screen-content">
+                            <div class="screen-left">
+                                <div class="terminal-header-hero">TERMINAL</div>
+                                <div class="terminal-content-hero">
+                                    <div class="terminal-line"><span class="text-cyan-400">$</span> gcc analyze.c</div>
+                                    <div class="terminal-line"><span class="text-yellow-400">analyzing</span> code...</div>
+                                    <div class="terminal-line text-yellow-400">warning: unused variable</div>
+                                    <div class="terminal-line"><span class="text-green-400">✓ Complete</span></div>
+                                </div>
+                            </div>
+                            <div class="screen-right">
+                                <div class="ai-header-hero">AI ASSISTANT</div>
+                                <div class="ai-content-hero">
+                                    <div class="ai-message-hero">Your code has one unused variable on line 5. Consider removing it or refactoring your logic.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="laptop-keyboard"></div>
+                    <div class="laptop-base"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full-Screen AI Coding Platform Section -->
+    <section id="app-section" class="min-h-screen pt-24 pb-20 px-6 flex flex-col">
+        <div class="max-w-7xl mx-auto w-full flex-1 flex flex-col">
+            <!-- App Viewport -->
+            <div class="app-viewport fade-in-element">
+                <!-- Left Panel - Code Editor -->
+                <div class="editor-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Code Editor</span>
+                        <span class="panel-lang">C</span>
+                    </div>
+                    <div class="code-editor-wrapper">
+                        <div class="code-line-numbers" id="lineNumbers"></div>
+                        <textarea id="codeEditor" class="code-textarea" spellcheck="false">#include <stdio.h>
+
+int main() {
+    printf("Welcome to C.AI\n");
+    return 0;
+}</textarea>
+                    </div>
+                </div>
+
+                <!-- Right Panel - AI Assistant -->
+                <div class="ai-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">AI Assistant</span>
+                        <span class="ai-status">Ready</span>
+                    </div>
+                    <div id="aiChat" class="ai-chat-area">
+                        <div class="ai-welcome">
+                            <div class="ai-icon">✨</div>
+                            <p class="ai-welcome-text">Ready to analyze your code</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="app-buttons fade-in-element">
+                <button id="runBtn" class="btn-run" onclick="runCode()">
+                    <span class="btn-icon">▶</span>
+                    RUN
+                </button>
+                <button id="aiBtn" class="btn-ai" onclick="analyzeWithAI()">
+                    <span class="btn-icon">✨</span>
+                    AI ANALYZE
+                </button>
+            </div>
+
+            <!-- Terminal Output -->
+            <div class="terminal-panel fade-in-element">
+                <div class="panel-header">
+                    <span class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </span>
+                    <span class="panel-title">Terminal Output</span>
+                </div>
+                <div id="terminalOutput" class="terminal-content">
+                    <span class="terminal-prompt">$</span> Ready to execute code...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Powerful AI Features</h2>
+                <p class="text-gray-400 text-lg">Experience the future of code development</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="feature-card fade-in-element">
+                    <div class="feature-icon">🐛</div>
+                    <h3 class="text-xl font-bold mb-2">AI Debugging</h3>
+                    <p class="text-gray-400">Instantly identify bugs and get intelligent fixes.</p>
+                </div>
+
+                <div class="feature-card fade-in-element" style="animation-delay: 0.1s;">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">Smart Compilation</h3>
+                    <p class="text-gray-400">Compile and test instantly with real-time feedback.</p>
+                </div>
+
+                <div class="feature-card fade-in-element" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">📖</div>
+                    <h3 class="text-xl font-bold mb-2">Code Explanation</h3>
+                    <p class="text-gray-400">Get clear explanations for every line of code.</p>
+                </div>
+
+                <div class="feature-card fade-in-element" style="animation-delay: 0.3s;">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-xl font-bold mb-2">Error Detection</h3>
+                    <p class="text-gray-400">Catch errors before they become problems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Code Examples</h2>
+                <p class="text-gray-400 text-lg">See real C code analyzed by AI</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Code Example 1 -->
+                <div class="gallery-code-item fade-in-element">
+                    <div class="code-header">Hello World</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="function">main</span>() {
+    <span class="function">printf</span>(<span class="string">"Hello, C.AI!\n"</span>);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Code Example 2 -->
+                <div class="gallery-code-item fade-in-element" style="animation-delay: 0.1s;">
+                    <div class="code-header">Array Operations</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">int</span> <span class="function">sum_array</span>(<span class="keyword">int</span> arr[]) {
+    <span class="keyword">int</span> sum = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+        sum += arr[i];
+    }
+    <span class="keyword">return</span> sum;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Code Example 3 -->
+                <div class="gallery-code-item fade-in-element" style="animation-delay: 0.2s;">
+                    <div class="code-header">String Manipulation</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">void</span> <span class="function">reverse_string</span>(<span class="keyword">char</span> *str) {
+    <span class="keyword">int</span> len = <span class="function">strlen</span>(str);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len/<span class="number">2</span>; i++) {
+        <span class="keyword">char</span> temp = str[i];
+        str[i] = str[len-<span class="number">1</span>-i];
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Code Example 4 -->
+                <div class="gallery-code-item fade-in-element" style="animation-delay: 0.3s;">
+                    <div class="code-header">Fibonacci</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">int</span> <span class="function">fibonacci</span>(<span class="keyword">int</span> n) {
+    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>)
+        <span class="keyword">return</span> n;
+
+    <span class="keyword">return</span> <span class="function">fibonacci</span>(n-<span class="number">1</span>) +
+           <span class="function">fibonacci</span>(n-<span class="number">2</span>);
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Code Example 5 -->
+                <div class="gallery-code-item fade-in-element" style="animation-delay: 0.4s;">
+                    <div class="code-header">Struct Usage</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">struct</span> Person {
+    <span class="keyword">char</span> name[<span class="number">50</span>];
+    <span class="keyword">int</span> age;
+    <span class="keyword">float</span> salary;
+};
+
+<span class="keyword">int</span> <span class="function">main</span>() {
+    <span class="keyword">struct</span> Person p = {<span class="string">"John"</span>, <span class="number">30</span>, <span class="number">50000</span>};
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Code Example 6 -->
+                <div class="gallery-code-item fade-in-element" style="animation-delay: 0.5s;">
+                    <div class="code-header">Pointer Operations</div>
+                    <div class="code-display">
+                        <pre><code><span class="keyword">void</span> <span class="function">swap</span>(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b) {
+    <span class="keyword">int</span> temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+<span class="keyword">int</span> x = <span class="number">5</span>, y = <span class="number">10</span>;
+<span class="function">swap</span>(&x, &y);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
+                <p class="text-gray-400 text-lg">Have questions? We'd love to hear from you</p>
+            </div>
+
+            <div class="contact-card fade-in-element">
+                <form id="contactForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Your Name" required class="contact-input">
+                        <input type="email" placeholder="Your Email" required class="contact-input">
+                    </div>
+                    <input type="text" placeholder="Subject" required class="contact-input w-full">
+                    <textarea placeholder="Your Message" required class="contact-input w-full" rows="5"></textarea>
+                    <button type="submit" class="w-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-cyan-500/10 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center text-gray-500 text-sm">
+                <p>&copy; 2024 C.AI. Built with neon and AI magic.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/landing.js"></script>
+</body>
+</html>

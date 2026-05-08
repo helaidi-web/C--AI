@@ -327,7 +327,15 @@ async function askOpenAI({ code, question, analysis }) {
 }
 
 function serveStatic(req, res, pathname) {
-  const requested = pathname === '/' ? '/index.html' : pathname;
+  let requested = pathname;
+
+  // Route landing page to landing.html, app to index.html
+  if (pathname === '/') {
+    requested = '/landing.html';
+  } else if (pathname === '/app') {
+    requested = '/index.html';
+  }
+
   const normalized = path.normalize(requested).replace(/^([.]{2}[\\/])+/, '');
   const filePath = path.join(PUBLIC_DIR, normalized);
 
