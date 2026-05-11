@@ -376,76 +376,97 @@ const server = http.createServer(async (req, res) => {
       const raw = await readBody(req);
       const body = raw ? JSON.parse(raw) : {};
       const code = String(body.code || '');
-      
-      // -- MODE FLEXIBLE : Rendre "n'importe quoi" juste --
+
+      // Préparation du code
       let finalCode = code;
-      // 1. Ajouter les headers de base automatiquement s'ils n'y sont pas
-      if (!finalCode.includes('#include')) {
-          finalCode = "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n" + finalCode;
-      }
-      
-      // 2. S'il n'y a pas de fonction main, envelopper le code dans un main()
-      if (!finalCode.includes('main(') && !finalCode.includes('main ()') && code.trim().length > 0) {
-          finalCode = "#include <stdio.h>\n#include <stdlib.h>\nint main() {\n" + code + "\nreturn 0;\n}";
+      let hasMain = finalCode.includes('main');
+      let hasIncludes = finalCode.includes('#include');
+
+      // Ajouter les includes standards si absent
+      if (!hasIncludes) {
+          finalCode = "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <math.h>\n" + finalCode;
       }
 
-        // Compilation et excution C
-        const id = Date.now() + '_' + Math.floor(Math.random() * 10000);
-        const cFile = path.join(os.tmpdir(), `temp_${id}.c`);
-        const exeFile = path.join(os.tmpdir(), `temp_${id}.exe`);
-        const inFile = path.join(os.tmpdir(), `temp_${id}.in`);
-      
+      // Envelopper dans main() si absent
+      if (!hasMain && code.trim().length > 0) {
+          finalCode = "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <math.h>\nint main() {\n" + code + "\nreturn 0;\n}";
+      }
+
+      const id = Date.now() + '_' + Math.floor(Math.random() * 10000);
+      const cFile = path.join(os.tmpdir(), `temp_${id}.c`);
+      const exeFile = path.join(os.tmpdir(), `temp_${id}.exe`);
+      const inFile = path.join(os.tmpdir(), `temp_${id}.in`);
+
       const stdinData = String(body.stdin || '');
 
       fs.writeFileSync(cFile, finalCode);
       if (stdinData) {
           fs.writeFileSync(inFile, stdinData);
       }
-      
-      // Utilisation de -w (dsactiver avertissements) et -std=gnu89 (tolrer vieilles syntaxes sans 'int main' etc.)
-      exec(`gcc -w -std=gnu89 "${cFile}" -o "${exeFile}"`, (compileErr, compileOut, compileStderr) => {
+
+      // Compilation avec plus d'optimisations
+      exec(`gcc -Wall -Wextra -std=c99 "${cFile}" -o "${exeFile}" -lm`, (compileErr, compileOut, compileStderr) => {
         if (compileErr) {
           try { fs.unlinkSync(cFile); } catch(e){}
-          // Si mme le mode flexible choue (texte absurde), on renvoie un succs artificiel !
           let errStr = (compileStderr || compileOut || compileErr.message || '').toString();
-          errStr = errStr.split(cFile).join('main.c').split(__dirname + '\\').join('');
-          
+          errStr = errStr.split(cFile).join('main.c').split(__dirname).join('');
+
           sendJson(res, 200, {
             ok: true,
-            isCompileError: false, // Forc  false pour que ce soit toujours "juste" !
-            output: "[Mode Flexible] Le code a t valid et analys avec succs.\n\nRemarque de compilation (ignore) :\n" + errStr
+            isCompileError: true,
+            compilationError: true,
+            output: "Erreur de compilation:\n\n" + errStr,
+            errorDetails: {
+              type: 'compilation_error',
+              message: errStr,
+              code: code
+            }
           });
           return;
         }
-        
+
         let runCmd = `"${exeFile}"`;
         if (stdinData) {
             runCmd = `"${exeFile}" < "${inFile}"`;
         }
 
-        exec(runCmd, { timeout: 5000 }, (runErr, runOut, runStderr) => {
+        exec(runCmd, { timeout: 10000, maxBuffer: 10 * 1024 * 1024 }, (runErr, runOut, runStderr) => {
           try { fs.unlinkSync(cFile); } catch(e){}
           try { fs.unlinkSync(exeFile); } catch(e){}
           if (stdinData) { try { fs.unlinkSync(inFile); } catch(e){} }
-          
+
           let finalOut = (runOut || '').toString();
           let finalErr = (runStderr || '').toString();
-          
+          let executionSuccess = true;
+          let errorMsg = '';
+
           if (runErr) {
              if (runErr.killed) {
-                 finalErr += "\n[Termin : dlai limit  5s. Votre programme attend probablement un 'scanf' ou contient une boucle infinie.]";
+                 finalErr += "\n\n[TIMEOUT] Le programme a dépassé le délai limite de 10 secondes.\nVérifiez les boucles infinies ou attendez scanf.";
+                 executionSuccess = false;
+                 errorMsg = 'Timeout';
+             } else if (runErr.code !== 0 && runErr.code !== null) {
+                 finalErr += `\n\n[Exit Code: ${runErr.code}]`;
+                 executionSuccess = false;
+                 errorMsg = `Exit Code ${runErr.code}`;
              }
-             // On ignore compltement "Command failed: main.exe" gnr par Node.js 
-             // car en C, si on oublie "return 0;", le programme retourne un code d'erreur invisible mais Node s'en plaint !
           }
-          
+
           let totalOutput = finalOut;
           if (finalErr) totalOutput += (totalOutput ? "\n" : "") + finalErr;
-          
+
           sendJson(res, 200, {
             ok: true,
-            isCompileError: !!finalErr, // Ne passe en rouge QUE si le programme C a gnr une vraie erreur.
-            output: totalOutput.trim()
+            isCompileError: false,
+            compilationSuccess: true,
+            executionSuccess: executionSuccess,
+            output: totalOutput.trim() || '(Aucune sortie)',
+            executionDetails: {
+              stdout: finalOut.trim(),
+              stderr: finalErr.trim(),
+              exitCode: runErr ? runErr.code : 0,
+              timeout: runErr && runErr.killed
+            }
           });
         });
       });

@@ -266,6 +266,104 @@ function setupContactForm() {
     });
 }
 
+// Add Code Modal Functions
+function openAddCodeModal() {
+    document.getElementById('addCodeModal').classList.remove('hidden');
+}
+
+function closeAddCodeModal() {
+    document.getElementById('addCodeModal').classList.add('hidden');
+    document.getElementById('addCodeForm').reset();
+}
+
+// Delete code item from gallery
+function deleteCodeItem(button) {
+    const codeItem = button.closest('.gallery-code-item');
+    codeItem.style.opacity = '0';
+    codeItem.style.transform = 'translateY(-10px)';
+    setTimeout(() => {
+        codeItem.remove();
+    }, 300);
+}
+
+// Handle code submission
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('addCodeForm');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('codeTitle').value.trim();
+            const code = document.getElementById('codeContent').value.trim();
+
+            if (!title || !code) {
+                alert('Please fill in both title and code');
+                return;
+            }
+
+            // Create gallery item with syntax highlighting
+            const galleryItem = createGalleryItem(title, code);
+            const container = document.getElementById('code-gallery-container');
+            container.appendChild(galleryItem);
+
+            // Close modal and reset form
+            closeAddCodeModal();
+        });
+    }
+});
+
+function createGalleryItem(title, code) {
+    const item = document.createElement('div');
+    item.className = 'gallery-code-item fade-in-element';
+
+    const header = document.createElement('div');
+    header.className = 'code-header';
+    header.textContent = title;
+
+    const display = document.createElement('div');
+    display.className = 'code-display';
+
+    // Basic syntax highlighting
+    const highlighted = highlightCode(code);
+    const pre = document.createElement('pre');
+    const codeEl = document.createElement('code');
+    codeEl.innerHTML = highlighted;
+    pre.appendChild(codeEl);
+
+    display.appendChild(pre);
+    item.appendChild(header);
+    item.appendChild(display);
+
+    return item;
+}
+
+function highlightCode(code) {
+    // Basic C syntax highlighting
+    let highlighted = code
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    // Keywords
+    const keywords = ['#include', 'int', 'void', 'char', 'float', 'double', 'if', 'else', 'for', 'while', 'return', 'break', 'continue'];
+    keywords.forEach(kw => {
+        const regex = new RegExp(`\\b${kw}\\b`, 'g');
+        highlighted = highlighted.replace(regex, `<span class="keyword">${kw}</span>`);
+    });
+
+    // Strings
+    highlighted = highlighted.replace(/"[^"]*"/g, (match) => `<span class="string">${match}</span>`);
+
+    // Comments
+    highlighted = highlighted.replace(/\/\/[^\n]*/g, (match) => `<span class="comment">${match}</span>`);
+    highlighted = highlighted.replace(/\/\*[\s\S]*?\*\//g, (match) => `<span class="comment">${match}</span>`);
+
+    // Numbers
+    highlighted = highlighted.replace(/\b(\d+)\b/g, '<span class="number">$1</span>');
+
+    return highlighted;
+}
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
