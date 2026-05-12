@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Welcome</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #00d4ff;
+      --primary-dark: #0099cc;
+      --bg-dark: #0f1419;
+      --bg-card: #1a1f2e;
+      --text-primary: #ffffff;
+      --text-secondary: #a0aec0;
+      --border-color: #2d3748;
+      --neon-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+      color: var(--text-primary);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========================
+       NAVBAR
+       ======================== */
+
+    nav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .user-email {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .logout-btn {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+
+    .logout-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ========================
+       MAIN CONTENT
+       ======================== */
+
+    main {
+      flex: 1;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .welcome-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .welcome-card h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .welcome-card p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ========================
+       FEATURES GRID
+       ======================== */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary-color);
+      box-shadow: var(--neon-glow);
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ========================
+       LOADING STATE
+       ======================== */
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 212, 255, 0.2);
+      border-top-color: #00d4ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ========================
+       RESPONSIVE
+       ======================== */
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-right {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      .user-info {
+        text-align: center;
+      }
+
+      .logout-btn {
+        width: 100%;
+      }
+
+      main {
+        padding: 1.5rem 1rem;
+      }
+
+      .welcome-card h1 {
+        font-size: 1.8rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================
+       ERROR MESSAGE
+       ======================== */
+
+    .error-container {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid #ff6b6b;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .error-container h2 {
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    .error-container p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .login-redirect-btn {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .login-redirect-btn:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">DASHBOARD</div>
+    <div class="nav-right">
+      <div class="user-info">
+        <div class="user-name" id="userName">Loading...</div>
+        <div class="user-email" id="userEmail"></div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="mainContent">
+    <!-- Loading state -->
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script>
+
+  <!-- Firebase Config -->
+  <script src="firebase.js"></script>
+
+  <!-- Home Page Script -->
+  <script>
+    // ========================
+    // CHECK AUTHENTICATION STATUS
+    // ========================
+
+    // Get main content and user info elements
+    const mainContent = document.getElementById('mainContent');
+    const userNameElement = document.getElementById('userName');
+    const userEmailElement = document.getElementById('userEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Listen for authentication state changes
+    firebaseAuth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        // User is not logged in - show error and redirect
+        mainContent.innerHTML = `
+          <div class="error-container">
+            <h2>Access Denied</h2>
+            <p>You must be logged in to access this page.</p>
+            <button class="login-redirect-btn" onclick="window.location.href='index.html'">
+              Go to Login
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        // Fetch user data from Firestore
+        const userDoc = await firebaseDb.collection('users').doc(user.uid).get();
+
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+
+          // Update user info display
+          userNameElement.textContent = userData.name || 'User';
+          userEmailElement.textContent = user.email;
+
+          // Load dashboard content
+          loadDashboard(userData);
+        } else {
+          // User document doesn't exist - create it
+          await firebaseDb.collection('users').doc(user.uid).set({
+            name: 'User',
+            email: user.email,
+            createdAt: new Date(),
+            lastLogin: new Date(),
+            verified: false
+          });
+
+          userNameElement.textContent = 'User';
+          userEmailElement.textContent = user.email;
+          loadDashboard({});
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        mainContent.innerHTML = `
+          <div class="error-container">
+            <h2>Error Loading Dashboard</h2>
+            <p>${error.message}</p>
+          </div>
+        `;
+      }
+    });
+
+    // ========================
+    // LOAD DASHBOARD CONTENT
+    // ========================
+
+    function loadDashboard(userData) {
+      const currentHour = new Date().getHours();
+      let greeting = 'Good morning';
+
+      if (currentHour >= 12 && currentHour < 18) {
+        greeting = 'Good afternoon';
+      } else if (currentHour >= 18) {
+        greeting = 'Good evening';
+      }
+
+      mainContent.innerHTML = `
+        <div class="welcome-card">
+          <h1>${greeting}, ${userData.name || 'User'}! 👋</h1>
+          <p>Welcome to your secure dashboard. You are now logged in and can access all protected features.</p>
+        </div>
+
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure Authentication</h3>
+            <p>Your account is protected with Firebase Authentication and industry-standard security practices.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Data Management</h3>
+            <p>All your data is securely stored in Firestore with real-time synchronization.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast Performance</h3>
+            <p>Experience lightning-fast page loads with optimized database queries and caching.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Responsive Design</h3>
+            <p>Works seamlessly on desktop, tablet, and mobile devices with adaptive layouts.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🌙</div>
+            <h3>Dark Mode</h3>
+            <p>Easy on the eyes with a beautiful dark theme and blue neon accents throughout.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💾</div>
+            <h3>Cloud Storage</h3>
+            <p>Your information is automatically backed up and accessible from anywhere.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========================
+    // LOGOUT FUNCTIONALITY
+    // ========================
+
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        logoutBtn.disabled = true;
+        logoutBtn.textContent = 'Logging out...';
+
+        // Sign out from Firebase
+        await firebaseAuth.signOut();
+
+        // Redirect to login page
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        logoutBtn.disabled = false;
+        logoutBtn.textContent = 'Logout';
+        alert('Error logging out: ' + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
