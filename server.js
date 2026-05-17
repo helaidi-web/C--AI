@@ -430,7 +430,7 @@ const server = http.createServer(async (req, res) => {
             runCmd = `"${exeFile}" < "${inFile}"`;
         }
 
-        exec(runCmd, { timeout: 10000, maxBuffer: 10 * 1024 * 1024 }, (runErr, runOut, runStderr) => {
+        exec(runCmd, { timeout: 300000, maxBuffer: 10 * 1024 * 1024 }, (runErr, runOut, runStderr) => {
           try { fs.unlinkSync(cFile); } catch(e){}
           try { fs.unlinkSync(exeFile); } catch(e){}
           if (stdinData) { try { fs.unlinkSync(inFile); } catch(e){} }
@@ -442,7 +442,7 @@ const server = http.createServer(async (req, res) => {
 
           if (runErr) {
              if (runErr.killed) {
-                 finalErr += "\n\n[TIMEOUT] Le programme a dépassé le délai limite de 10 secondes.\nVérifiez les boucles infinies ou attendez scanf.";
+                 finalErr += "\n\n[TIMEOUT] Le programme a dépassé le délai limite de 5 minutes.\nVérifiez les boucles infinies ou attendez scanf.";
                  executionSuccess = false;
                  errorMsg = 'Timeout';
              } else if (runErr.code !== 0 && runErr.code !== null) {
