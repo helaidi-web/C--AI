@@ -63,15 +63,13 @@
 
             <div class="text-sm text-gray-400 flex items-center gap-4">
                 AI-Powered Code Platform
+                <button id="themeToggle" class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 transition" title="Toggle theme">
+                    <svg id="sunIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 18C6.48 18 2 13.52 2 8s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z"/></svg>
+                    <svg id="moonIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8 8 0 1 1 .12-11.86 1 1 0 0 0 1.07-.27 1 1 0 0 0-.63-1.6A10 10 0 0 0 12.1 2a9.9 9.9 0 0 0 9 17 9.7 9.7 0 0 0 .64-.07 1 1 0 0 0 .38-1.86z"/></svg>
+                </button>
                 <div class="flex gap-3 pl-4 border-l border-cyan-500/20">
                     <a href="https://github.com/helaidi-web" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 transition">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/hamza-el-aidi-b9210838b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                    </a>
-                    <a href="mailto:h.elaidi@esisa.ac.ma" class="inline-flex items-center justify-center w-8 h-8 text-cyan-400 hover:text-cyan-300 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </a>
                 </div>
             </div>
@@ -104,12 +102,6 @@
                 <div class="flex gap-4 pt-4">
                     <a href="https://github.com/helaidi-web" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/hamza-el-aidi-b9210838b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                    </a>
-                    <a href="mailto:h.elaidi@esisa.ac.ma" class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </a>
                 </div>
                 <div class="mt-12 space-y-3">
@@ -157,22 +149,110 @@
     <!-- Full-Screen AI Coding Platform Section -->
     <section id="app-section" class="min-h-screen pt-24 pb-20 px-6 flex flex-col">
         <div class="max-w-7xl mx-auto w-full flex-1 flex flex-col">
+            <div class="premium-topbar fade-in-element">
+                <div class="premium-left">
+                    <button id="sidebarToggle" class="premium-icon-btn" type="button" title="Toggle sidebar">≡</button>
+                    <button id="settingsToggle" class="premium-icon-btn" type="button" title="Open settings">⚙</button>
+                    <button id="aiToolsToggle" class="premium-icon-btn" type="button" title="Open AI tools">◈</button>
+                </div>
+                <div class="premium-status-strip">
+                    <span class="status-chip">VSCode C Workspace</span>
+                    <span class="status-chip">AI Bilingual Mode</span>
+                    <span class="status-chip">Terminal Premium</span>
+                </div>
+                <button id="openQuickModal" class="premium-action-btn" type="button">Quick Command</button>
+            </div>
+
+            <div class="premium-dashboard fade-in-element">
+                <div class="dash-card">
+                    <p class="dash-label">Lines</p>
+                    <p class="dash-value" id="statLines">0</p>
+                </div>
+                <div class="dash-card">
+                    <p class="dash-label">Functions</p>
+                    <p class="dash-value" id="statFunctions">0</p>
+                </div>
+                <div class="dash-card">
+                    <p class="dash-label">Memory Ops</p>
+                    <p class="dash-value" id="statMemory">0</p>
+                </div>
+                <div class="dash-card">
+                    <p class="dash-label">Warnings</p>
+                    <p class="dash-value" id="statWarnings">0</p>
+                </div>
+            </div>
+
+            <div class="mobile-split-controls fade-in-element" id="mobileSplitControls">
+                <button type="button" class="mobile-split-btn active" data-view="editor">Editor</button>
+                <button type="button" class="mobile-split-btn" data-view="terminal">Terminal</button>
+            </div>
+
+            <div id="premiumSidebar" class="premium-sidebar fade-in-element" aria-hidden="false">
+                <div class="premium-sidebar-title">Explorer</div>
+                <button class="sidebar-item active" data-file="main.c" type="button">main.c</button>
+                <button class="sidebar-item" data-file="memory.c" type="button">memory.c</button>
+                <button class="sidebar-item" data-file="helpers.h" type="button">helpers.h</button>
+                <button class="sidebar-item" data-file="README.md" type="button">README.md</button>
+            </div>
+
+            <div id="settingsPanel" class="glass-panel settings-panel hidden" aria-hidden="true">
+                <h3 class="panel-subtitle">Settings</h3>
+                <label class="setting-row"><span>Typing animation</span><input id="toggleTyping" type="checkbox" checked></label>
+                <label class="setting-row"><span>Scan effect</span><input id="toggleScan" type="checkbox" checked></label>
+                <label class="setting-row"><span>Compact mode</span><input id="toggleCompact" type="checkbox"></label>
+            </div>
+
+            <div id="aiToolsPanel" class="glass-panel ai-tools-panel hidden" aria-hidden="true">
+                <h3 class="panel-subtitle">AI Tools</h3>
+                <button class="tool-btn" data-tool="line">Explain line by line</button>
+                <button class="tool-btn" data-tool="memory">Memory checker</button>
+                <button class="tool-btn" data-tool="optimize">Optimization hints</button>
+                <button class="tool-btn" data-tool="bugs">Error detection</button>
+            </div>
+
             <!-- App Viewport -->
             <div class="app-viewport fade-in-element">
                 <!-- Left Panel - Code Editor -->
                 <div class="editor-panel">
                     <div class="panel-header">
                         <span class="panel-title">Code Editor</span>
-                        <span class="panel-lang">C</span>
+                        <span class="panel-lang" id="activeFileName">main.c</span>
+                    </div>
+                    <div class="editor-tabs" id="editorTabs">
+                        <button class="editor-tab active" type="button" data-file="main.c">main.c</button>
+                        <button class="editor-tab" type="button" data-file="memory.c">memory.c</button>
+                        <button class="editor-tab" type="button" data-file="helpers.h">helpers.h</button>
                     </div>
                     <div class="code-editor-wrapper">
                         <div class="code-line-numbers" id="lineNumbers"></div>
+                        <pre id="highlightLayer" class="code-highlight" aria-hidden="true"></pre>
                         <textarea id="codeEditor" class="code-textarea" spellcheck="false">#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-    printf("Welcome to C.AI\n");
+    int n = 5;
+    int *arr = malloc(n * sizeof(int));
+    if (!arr) return 1;
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = i * 3;
+    }
+
+    arr = realloc(arr, (n + 2) * sizeof(int));
+    printf("Welcome to C.AI premium mode\\n");
+    free(arr);
     return 0;
 }</textarea>
+                        <div id="editorCursor" class="editor-cursor" aria-hidden="true"></div>
+                    </div>
+                    <div class="editor-statusbar">
+                        <span>UTF-8</span>
+                        <span>C</span>
+                        <span id="cursorPos">Ln 1, Col 1</span>
+                    </div>
+                    <div class="embedded-terminal">
+                        <div class="embedded-terminal-head">Integrated Terminal</div>
+                        <div id="embeddedTerminalBody" class="embedded-terminal-body"></div>
                     </div>
                 </div>
 
@@ -182,10 +262,10 @@ int main() {
                         <span class="panel-title">AI Assistant</span>
                         <span class="ai-status">Ready</span>
                     </div>
-                    <div id="aiChat" class="ai-chat-area">
+                    <div id="aiChat" class="ai-chat-area premium-ai-chat">
                         <div class="ai-welcome">
                             <div class="ai-icon">✨</div>
-                            <p class="ai-welcome-text">Ready to analyze your code</p>
+                            <p class="ai-welcome-text">Ready to analyze your code (FR + AR)</p>
                         </div>
                     </div>
                 </div>
@@ -211,12 +291,38 @@ int main() {
                         <span class="dot yellow"></span>
                         <span class="dot green"></span>
                     </span>
-                    <span class="panel-title">Terminal Output</span>
+                    <span class="panel-title">Terminal Premium</span>
                 </div>
-                <div id="terminalOutput" class="terminal-content">
+                <div id="terminalOutput" class="terminal-content premium-terminal-content scan-enabled">
                     <span class="terminal-prompt">$</span> Ready to execute code...
                 </div>
+                <div class="terminal-input-wrap">
+                    <span class="terminal-input-prefix">user@cai:~$</span>
+                    <input id="terminalInput" class="terminal-input" type="text" placeholder="Type command and press Enter" autocomplete="off">
+                    <button id="terminalEnterBtn" class="terminal-enter-btn" type="button">Enter</button>
+                </div>
+                <div id="terminalSuggestion" class="terminal-suggestion"></div>
             </div>
+
+            <div class="floating-actions">
+                <button id="floatingRun" class="floating-btn" type="button" title="Run">▶</button>
+                <button id="floatingAnalyze" class="floating-btn" type="button" title="Analyze">✦</button>
+            </div>
+
+            <div id="premiumLoader" class="premium-loader hidden" aria-hidden="true">
+                <div class="loader-ring"></div>
+                <span>AI Processing</span>
+            </div>
+
+            <div id="quickModal" class="quick-modal hidden" aria-hidden="true">
+                <div class="quick-modal-content">
+                    <h3>Quick Command Palette</h3>
+                    <p>Use shortcuts: run, analyze, memory, clear.</p>
+                    <button id="closeQuickModal" type="button">Close</button>
+                </div>
+            </div>
+
+            <div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
         </div>
     </section>
 
@@ -443,6 +549,32 @@ int main() {
         </div>
     </section>
 
+    <!-- LinkedIn QR Section -->
+    <section id="linkedin-qr" class="py-16 relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="linkedin-qr-box fade-in-element">
+                <div class="linkedin-qr-header">
+                    <div class="linkedin-qr-title-wrap">
+                        <span class="linkedin-badge">LinkedIn</span>
+                        <h3 class="linkedin-qr-title">Scan & Connect</h3>
+                    </div>
+                    <a href="https://www.linkedin.com/in/hamza-el-aidi-b9210838b" target="_blank" rel="noopener noreferrer" class="linkedin-open-btn">Open Profile</a>
+                </div>
+
+                <p class="linkedin-qr-subtitle">Scanne un QR pour ouvrir rapidement le profil LinkedIn depuis mobile.</p>
+
+                <div class="linkedin-qr-grid">
+                    <div class="linkedin-qr-card">
+                        <img src="/qr-linkedin-1.png" alt="LinkedIn QR code 1" class="linkedin-qr-image">
+                    </div>
+                    <div class="linkedin-qr-card">
+                        <img src="/qr-linkedin-2.png" alt="LinkedIn QR code 2" class="linkedin-qr-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-cyan-500/10 relative">
         <div class="max-w-7xl mx-auto px-6">
@@ -451,18 +583,6 @@ int main() {
                 <div class="flex justify-center gap-8">
                     <a href="https://github.com/helaidi-web" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/hamza-el-aidi-b9210838b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                    </a>
-                    <a href="mailto:h.elaidi@esisa.ac.ma" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/meryem-touhafi-riffi-173a58398" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                    </a>
-                    <a href="mailto:m.touhafiriffi@esisa.ac.ma" class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-cyan-500/30 text-cyan-400 hover:border-cyan-500 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/50 transition">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </a>
                 </div>
             </div>
