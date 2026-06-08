@@ -246,7 +246,7 @@ function buildLocalAnswer(code, question) {
   return answerLines.join('\n');
 }
 
-async function askOpenAI({ code, question, analysis }) {
+async function askOpenAI({ code, question }) {
   if (!OPENAI_API_KEY) {
     console.log('[OpenAI] No API key - using local fallback');
     return {
@@ -489,7 +489,7 @@ const server = http.createServer(async (req, res) => {
       
       console.log(`[API /assistant] Request received - code length: ${code.length}, question: "${question.substring(0, 50)}..."`);
       
-      const ai = await askOpenAI({ code, question, analysis });
+      const ai = await askOpenAI({ code, question });
 
       console.log(`[API /assistant] Response ready - usedOpenAI: ${ai.usedOpenAI}`);
 
